@@ -1,0 +1,75 @@
+/* CONTAINER SETTINGS START */
+$font-stack: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+$border-color: black;
+$radius: 0.5em;
+$gap-sm: 5px;
+$gap-md: 10px;
+
+%btn-base {
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  align-content: center;
+  text-align: center;
+}
+
+* {
+  font-family: $font-stack;
+  box-sizing: border-box;
+}
+
+#container {
+  width: 300px;
+  height: 500px;
+  border: 3px solid $border-color;
+  display: flex;
+  margin: 0 auto;
+  border-radius: $radius;
+  flex-direction: column;
+  align-items: center;
+  gap: $gap-sm;
+
+  #output {
+    border: 2px solid $border-color;
+    width: 260px;
+    height: 50px;
+    margin: 20px;
+    border-radius: $radius;
+  }
+
+  .button-row {
+    display: flex;
+    gap: $gap-md;
+
+    #clear {
+      @extend %btn-base;
+      width: 180px;
+      height: 50px;
+    }
+
+    #backspace {
+      @extend %btn-base;
+      width: 60px;
+      height: 50px;
+    }
+  }
+
+  .keypad {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $gap-sm;
+    width: 90%;
+    height: 70%;
+    margin: 5px;
+
+    > button {
+      @extend %btn-base;
+    }
+  }
+}
+
+button {
+  &:hover {
+    background-color: grey;
+  }
+}
+/* CONTAINER SETTINGS END */
