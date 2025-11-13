@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <title>Sign-up Form</title>
 </head>
 <body>
-    
+    <section class="left-side">
+        <img src="leafs.jpg" alt="Green leafs">
+        <img src="odin-lined.png" alt="Odin Projects logo">
+    </section>
+    <section class="right-side">
+        <p class="first-line">
+            This is not a real online service! You know you need something like this in your life to help you
+            realize your deepest dreams. <br>Sign up <i>now</i> to get started.
+        </p>
+        <p class="second-line">
+            You <i>know</i> you want to.
+        </p>
+        <p class="third-line">
+            Let's do this!
+        </p>
+
+        <div class="form-area">
+            <form>
+                <label for="fname">First name</label>
+                <input type="text" id="fname" >
+                <label for="lname">Last name</label>
+                <input type="text" id="lname">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+                <label for="pnumber">Phone number</label>
+                <input type="tel" id="pnumber">
+                <label for="pass">Password</label>
+                <input type="password" id="pass">
+                <label for="confPass">Confirm Password</label>
+                <input type="password" id="confPass">
+            </form>
+        </div>
+        <div class="bottom-area">
+            <button type="button">Create Account</button>
+            <p>Already have an account? <a href="#">Log in</a></p>
+        </div>
+    </section>
 </body>
 </html>
