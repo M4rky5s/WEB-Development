@@ -12,8 +12,11 @@
 <body>
     <section class="both-sides">
         <section class="left-side">
-            <img src="leafs.jpg" alt="Green leafs">
-            <img src="odin-lined.png" alt="Odin Projects logo">
+            <img src="leafs.jpg" alt="Green leafs" id="leafs">
+            <div class="overlay">
+                <img src="odin-lined.png" alt="Odin Projects logo" id="logo">
+                <h1 class="logo-title">ODIN</h1>
+            </div>
         </section>
         <section class="right-side">
             <p class="first-line">
@@ -29,18 +32,30 @@
 
             <div class="form-area">
                 <form>
-                    <label for="fname">First name</label>
-                    <input type="text" id="fname" >
-                    <label for="lname">Last name</label>
-                    <input type="text" id="lname">
-                    <label for="email">Email</label>
-                    <input type="email" id="email">
-                    <label for="pnumber">Phone number</label>
-                    <input type="tel" id="pnumber">
-                    <label for="pass">Password</label>
-                    <input type="password" id="pass" required>
-                    <label for="confPass">Confirm Password</label>
-                    <input type="password" id="confPass" required>
+                    <div class="form-group">
+                        <label for="fname">First name</label>
+                        <input type="text" id="fname" >
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last name</label>
+                        <input type="text" id="lname">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pnumber">Phone number</label>
+                        <input type="tel" id="pnumber">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass">Password</label>
+                        <input type="password" id="pass" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confPass">Confirm Password</label>
+                        <input type="password" id="confPass" required>
+                    </div>
                 </form>
             </div>
             <div class="bottom-area">
