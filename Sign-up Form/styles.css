@@ -1,3 +1,43 @@
 * {
     font-family: "Stack Sans Headline", sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+.both-sides {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* LEFT SIDE SETTINGS */
+.left-side {
+    width: 35%;
+    background-image: url(leafs.jpg);
+    background-repeat: no-repeat;
+}
+
+.left-side > img {
+    width: 100%;
+    height: 100vh;
+}
+
+/* RIGHT SIDE SETTINGS */
+.right-side {
+    width: 65%;
+    margin: 0 60px 0 40px;
+}
+
+.right-side > .first-line {
+    margin-top: 150px;
+    font-weight: 900;
+}
+
+.right-side > .second-line {
+    margin-top: 20px;
+    font-weight: 900;
+}
+
+.right-side > .third-line {
+    margin-top: 100px;
+    margin-bottom: 20px;
 }
