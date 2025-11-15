@@ -62,24 +62,28 @@
 /* RIGHT SIDE SETTINGS */
 .right-side {
     width: 65%;
-    margin: 0 70px;
+    padding: 0 70px;
     font-size: 20px;
 }
 
 .right-side > .first-line {
     margin-top: 150px;
-    font-weight: 900;
+    font-weight: 500;
+    word-spacing: 2px;
 }
 
 .right-side > .second-line {
     margin-top: 20px;
-    font-weight: 900;
+    font-weight: 500;
+    word-spacing: 2px;
 }
 
 .right-side > .third-line {
     margin-top: 100px;
     margin-bottom: 20px;
-    font-weight: 600;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgb(75, 75, 75);
 }
 
 .form-area {
@@ -94,10 +98,12 @@
     width: 70%;
     margin-bottom: 5px;
     text-indent: 7px;
+    height: 30px;
+    font-size: 20px;
 }
 
-.form-group input{
-    font-size: 12px;
+.form-group input {
+    font-size: 15px;
 }
 
 .form-group > input:focus {
@@ -127,4 +133,37 @@
     margin-bottom: 2px;
     letter-spacing: 2px;
     font-weight: 600;
+}
+
+.right-side hr {
+    margin-left: calc(-70px);
+    margin-right: calc(-70px);
+    border: 0.5px solid rgba(158, 158, 158, 0.4);
+}
+
+.bottom-area {
+    margin-top: 30px;
+}
+
+.bottom-area button {
+    background-color: #596D48;
+    color: white;
+    width: 220px;
+    height: 50px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    box-shadow: 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.bottom-area p {
+    margin-top: 30px;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.bottom-area a {
+    color: #596D48;
+    font-weight: 700;
+    text-decoration: none;
 }
