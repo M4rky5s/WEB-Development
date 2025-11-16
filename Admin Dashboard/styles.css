@@ -54,6 +54,7 @@ body {
     margin-bottom: 60px;
     margin-left: 15px;
 }
+
 .sidebar .dashboard a {
     margin-left: 5px;
     padding-left: 0;
@@ -66,6 +67,7 @@ body {
 .sidebar div:nth-child(7){
     margin-bottom: 60px;
 }
+
 .sidebar a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
@@ -76,12 +78,137 @@ body {
     font-size: 20px;
 }
 /* SIDEBAD SETTINGS END*/
-
 /* TOP NAVIGATION BAR SETTINGS START*/
 .top-nav {
     display: grid;
-    grid-template-columns: 1fr auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-areas: 
+        "form notification profile" 
+        "hi buttons buttons"
+    ;
     align-items: center;
 }
+
+.top-nav form {grid-area: form;}
+.top-nav > a {
+    grid-area: notification;
+    justify-self: end;
+}
+.top-nav .profile {grid-area: profile;}
+.top-nav .hi {grid-area: hi;}
+.top-nav .buttons {grid-area: buttons;}
+
+.top-nav .search {
+    --padding: 14px;
+
+    width: max-content;
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    background-color: #f6f6f6;
+    margin-left: 20px;
+}
+
+.top-nav .search-input {
+    font-size: 16px;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background-color: rgb(209, 209, 209, 0.4);
+    border-radius: 28px;
+    width: 590px;
+    height: 30px;
+}
+
+.top-nav .search-icon {
+    color: black;
+}
+
+.top-nav .notification-icon {
+    color: black;
+    align-items: center;
+}
+
+.top-nav .profile a{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.top-nav .profile img {
+    width: 40px;
+    padding: 20px;
+    border-radius: 100%;
+}
+
+.top-nav .profile .nickname {
+    padding-right: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.top-nav .hi {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    max-width: 500px;
+}
+
+.top-nav .hi .hi-block{
+    display: block;
+    padding-left: 20px;
+}
+
+.top-nav .hi .hi-block h2 {
+    font-size: 16px;
+}
+
+.top-nav .hi .hi-block .nickname {
+    font-size: 26px;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.top-nav .hi img {
+    width: 60px;
+    padding: 10px 10px 20px 30px;
+    border-radius: 100%;
+}
+
+.top-nav .buttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    justify-content: end;
+    margin-right: 50px;
+}
+
+.top-nav .buttons button {
+    color: white;
+    background-color: rgb(44, 151, 252);
+    border: none;
+    border-radius: 28px;
+    width: 120px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+/* TOP NAVIGATION BAR SETTINGS END*/
+
+/* BOTTOM AREA SETTINGS START*/
+.bottom-area {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-areas: 
+        "sections sections announcements"
+        "sections sections trending"
+    ;
+    align-items: center;
+}
+
+.bottom-area .projects {grid-area: sections;}
+.bottom-area .announcements {grid-area: announcements;}
+.bottom-area .trending {grid-area: trending;}
 
