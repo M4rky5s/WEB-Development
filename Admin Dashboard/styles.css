@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "NorseBold";
+    src: url("Fonts/Norse-Bold.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    font-family: "Stans Sans Headline", sans-serif;
+    margin: 0;
+    /*overflow: hidden;*/
+}
+
+body {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+}
+
+.sidebar {
+    height: 100%;
+    width: 300px;
+    top: 0;
+    left: 0;
+    background-color: rgb(65, 115, 255);
+    overflow-x: hidden;
+}
+
+.sidebar 
+    .dashboard,
+    .home,
+    .profile,
+    .messages,
+    .history,
+    .tasks,
+    .communities,
+    .settings,
+    .support,
+    .privacy{
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        margin-bottom: 15px;
+}
+
+.sidebar
+    .dashboard-logo,
+    .home-logo,
+    .profile-logo,
+    .messages-logo,
+    .history-logo,
+    .tasks-logo,
+    .communities-logo,
+    .settings-logo,
+    .support-logo,
+    .privacy-logo{
+        color: white;
+}
+
+.sidebar div:first-child{
+    font-size: 34px;
+    margin-bottom: 60px;
+    margin-left: 5px;
+}
+
+.sidebar .dashboard-logo {
+    font-size: 40px;
+}
+
+.sidebar div:nth-child(7){
+    margin-bottom: 60px;
+}
+.sidebar a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    display: block;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
