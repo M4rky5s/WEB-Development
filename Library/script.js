@@ -1,21 +1,27 @@
 const myLibrary = [];
 
-const button = document.getElementById('createBtn');
+const submitButton = document.getElementById('submitBook');
+const addBookButton = document.getElementById('addNewBook');
+const bookDialog = document.getElementById('bookDialog');
 const tableBody = document.getElementById('tableBody');
+const toggleFormButton = document.getElementById('toggleFormBtn');
+const bookForm = document.getElementById('bookForm');
 
-function Book(author, name, year){
+function Book(author, title, pages, status){
     this.id = crypto.randomUUID();
     this.author = author;
-    this.name = name;
-    this.year = year;
+    this.title = title;
+    this.pages = pages;
+    this.status = status;
 }
 
 function addBookToLibrary() {
     let author = document.getElementById('author').value;
-    let name = document.getElementById('name').value;
-    let year = document.getElementById('year').value;
+    let title = document.getElementById('title').value;
+    let pages = document.getElementById('pages').value;
+    let status = document.querySelector('input[name="status"]:checked').value;
 
-    let book = new Book(author, name, year);
+    let book = new Book(author, title, pages, status);
 
     myLibrary.push(book);
     renderTable();
@@ -36,18 +42,26 @@ function renderTable() {
         authorCell.textContent = book.author;
         row.appendChild(authorCell);
 
-        const nameCell = document.createElement('td');
-        nameCell.textContent = book.name;
-        row.appendChild(nameCell);
+        const titleCell = document.createElement('td');
+        titleCell.textContent = book.title;
+        row.appendChild(titleCell);
 
-        const yearCell = document.createElement('td');
-        yearCell.textContent = book.year;
-        row.appendChild(yearCell);
+        const pagesCell = document.createElement('td');
+        pagesCell.textContent = book.pages;
+        row.appendChild(pagesCell);
+
+        const statusCell = document.createElement('td');
+        statusCell.textContent = book.status;
+        row.appendChild(statusCell);
 
         tableBody.appendChild(row);
     });
 }
 
-button.addEventListener ('click', () =>{
+addBookButton.addEventListener("click", () => {
+    bookDialog.showModal();
+})
+
+submitButton.addEventListener ('click', () =>{
     addBookToLibrary();
 })

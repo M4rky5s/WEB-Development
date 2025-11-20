@@ -5,6 +5,6 @@
 table, th, td {
   border: 1px solid black;
   border-collapse: collapse; /* kad dvigubos linijos susijungtų */
-  width: 900px;
+  width: 1600px;
   text-align: center;
 }
