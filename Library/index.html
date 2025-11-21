@@ -21,9 +21,17 @@
             <input type="radio" id="unread" name="status" value="Unread">
             <label for="unread">Unread</label> <br>
             <button type="button" id="submitBook">Submit a Book</button>
+            <button type="button" id="cancelBookAdd">Cancel</button>
         </form>
     </dialog>
     <button id="addNewBook">Add New Book</button>
+    <button id="removeBook">Remove Book</button>
+    <dialog id="removeDialog">
+        <label for="id">Enter ID</label>
+        <input type="text" id="id"><br>
+        <button type="button" id="confirmRemove">Confirm</button>
+        <button type='button' id="cancelBookRemove">Cancel</button>
+    </dialog>
     <table>
         <thead>
             <tr>
