@@ -20,6 +20,14 @@ function Book(author, title, pages, status){
     this.status = status;
 }
 
+Book.prototype.toggleStatus = function (){
+    if(this.status === 'Has Been Read'){
+        this.status = 'Unread';
+    } else {
+        this.status = 'Has Been Read';
+    }
+}
+
 function addBookToLibrary() {
     let author = document.getElementById('author').value;
     let title = document.getElementById('title').value;
@@ -31,6 +39,7 @@ function addBookToLibrary() {
     myLibrary.push(book);
     renderTable();
     console.table(myLibrary);
+    console.log(book.status);
 }
 
 function removeBookFromLibrary() {
@@ -78,6 +87,17 @@ function renderTable() {
         const statusCell = document.createElement('td');
         statusCell.textContent = book.status;
         row.appendChild(statusCell);
+
+        const btn = document.createElement('button');
+        btn.textContent = 'Change status';
+        row.appendChild(btn);
+
+        btn.addEventListener('click', () => {
+            book.toggleStatus();
+            renderTable();
+            console.log(book.status);
+            console.table(myLibrary);
+        })
 
         tableBody.appendChild(row);
     });
