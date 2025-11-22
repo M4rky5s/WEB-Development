@@ -8,3 +8,16 @@ table, th, td {
   width: 1600px;
   text-align: center;
 }
+
+#bookDialog {
+  width: 400px;
+  height: 300px;
+}
+
+#removeDialog {
+  width: 400px;
+}
+
+input#id {
+  width: 350px;
+}

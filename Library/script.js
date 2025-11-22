@@ -30,24 +30,27 @@ function addBookToLibrary() {
 
     myLibrary.push(book);
     renderTable();
-    console.log(myLibrary);
+    console.table(myLibrary);
 }
 
 function removeBookFromLibrary() {
     let id = document.getElementById('id').value;
+    let findBook = myLibrary.find(book => book.id == id);
 
-    if(id == myLibrary.includes(id)){
-        let index = myLibrary.indexOf(id);                  // Klaida cia, reik kazka daryt sitoj vietoj
+    console.log(findBook);
+
+    if(myLibrary.includes(findBook)){
+        let index = myLibrary.indexOf(findBook);
+        myLibrary.splice(index, 1);
         deleteRow(index);
     } else {
-        console.log(myLibrary.includes(id));
+        console.log(myLibrary.includes(findBook));
         console.log(id);
     }
 }
 
-function deleteRow(r) {
-    var i = r.parentNode.parentNode.rowIndex;
-    tableBody.body.deleteRow(i);
+function deleteRow(i) {
+    tableBody.deleteRow(i);
 }
 
 function renderTable() {
@@ -80,6 +83,15 @@ function renderTable() {
     });
 }
 
+function deleteAfterButtonPressed() {
+    document.querySelectorAll("input[type=text], input[type=number]").forEach(input => {
+        input.value = '';
+    })
+    document.querySelectorAll("input[type=radio]").forEach(radio => {
+        radio.checked = false;
+    })
+}
+
 addBookButton.addEventListener("click", () => {
     bookDialog.showModal();
 })
@@ -90,16 +102,20 @@ removeBookButton.addEventListener("click", () => {
 
 cancelBookRemove.addEventListener("click", () => {
     removeDialog.close();
+    deleteAfterButtonPressed();
 })
 
 cancelBookButton.addEventListener("click", () => {
     bookDialog.close();
+    deleteAfterButtonPressed();
 })
 
 submitButton.addEventListener ("click", () =>{
     addBookToLibrary();
+    deleteAfterButtonPressed();
 })
 
 confirmRemove.addEventListener ("click", () => {
     removeBookFromLibrary();
+    deleteAfterButtonPressed();
 })
