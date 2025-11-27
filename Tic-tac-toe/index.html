@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Tic Tac Toe</title>
 </head>
 <body>
-    <dialog class="gameBoard">
-        <div></div>
-    </dialog>
+
     <label for="playerOne">Player 1</label>
     <input type="text" id="playerOne">
+
     <label for="playerTwo">Player 2</label>
     <input type="text" id="playerTwo">
+
     <button type="button" id="start">Start game</button>
+
+    <h2 id="status"></h2>
+
+    <div id="board"></div>
+
     <script src="script.js"></script>
 </body>
 </html>

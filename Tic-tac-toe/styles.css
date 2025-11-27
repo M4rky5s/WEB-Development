@@ -1,0 +1,26 @@
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    width: max-content;
+    margin-top: 20px;
+    border: 2px solid black;
+}
+
+#board > div {
+    border: 2px solid black;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    background: #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    cursor: pointer;
+}
+.cell:hover {
+    background: #ddd;
+}

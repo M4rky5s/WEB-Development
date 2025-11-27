@@ -1,68 +1,84 @@
 let board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+let players = [];
+let currentPlayerIndex = 0;
+let gameActive = false;
 
-const players = [];
-
-function Player(name){
+function Player(name, symbol) {
     this.name = name;
+    this.symbol = symbol;
 }
 
-function printBoard() {
-    console.log(`${board[0]} | ${board[1]} | ${board[2]}`);
-    console.log(`${board[3]} | ${board[4]} | ${board[5]}`);
-    console.log(`${board[6]} | ${board[7]} | ${board[8]}`);
+function startGame() {
+    const p1 = document.getElementById("playerOne").value || "Player 1";
+    const p2 = document.getElementById("playerTwo").value || "Player 2";
+
+    players = [
+        new Player(p1, "X"),
+        new Player(p2, "O")
+    ];
+
+    board = ["-", "-", "-", "-", "-", "-", "-", "-", "-"];
+    currentPlayerIndex = 0;
+    gameActive = true;
+
+    document.getElementById("status").textContent =
+        `${players[currentPlayerIndex].name} (${players[currentPlayerIndex].symbol}) turn`;
+
+    renderBoard();
 }
 
-function takeTurn(player) {
-    console.log(`${player}'s turn.`);
-    let position = prompt("Choose a position from 1-9:");
-    position -= 1;
-    while (position < 0 || position > 8 || board[position] !== "-") {
-        position = prompt("Invalid input or position already taken. Choose a different position:");
-        position -= 1;
+function renderBoard() {
+    const boardDiv = document.getElementById("board");
+    boardDiv.innerHTML = "";
+
+    board.forEach((cell, index) => {
+        const div = document.createElement("div");
+        div.classList.add("cell");
+        div.textContent = cell === "-" ? "" : cell;
+
+        div.addEventListener("click", () => handleCellClick(index));
+
+        boardDiv.appendChild(div);
+    });
+}
+
+function handleCellClick(index) {
+    if (!gameActive || board[index] !== "-") return;
+
+    const player = players[currentPlayerIndex];
+
+    board[index] = player.symbol;
+    renderBoard();
+
+    if (checkWin(player.symbol)) {
+        document.getElementById("status").textContent =
+            `${player.name} (${player.symbol}) wins!`;
+        gameActive = false;
+        return;
     }
-    board[position] = player;
-    printBoard();
-}
 
-function checkGameOver() {
-    if ((board[0] === board[1] && board[1] === board[2] && board[0] !== "-") ||
-        (board[3] === board[4] && board[4] === board[5] && board[3] !== "-") ||
-        (board[6] === board[7] && board[7] === board[8] && board[6] !== "-") ||
-        (board[0] === board[3] && board[3] === board[6] && board[0] !== "-") ||
-        (board[1] === board[4] && board[4] === board[7] && board[1] !== "-") ||
-        (board[2] === board[5] && board[5] === board[8] && board[2] !== "-") ||
-        (board[0] === board[4] && board[4] === board[8] && board[0] !== "-") ||
-        (board[2] === board[4] && board[4] === board[6] && board[2] !== "-")) {
-        return "win";
-    } else if (!board.includes("-")) {
-        return "tie";
-    } else {
-        return "play";
+    if (!board.includes("-")) {
+        document.getElementById("status").textContent = "It's a tie!";
+        gameActive = false;
+        return;
     }
+
+    currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
+
+    document.getElementById("status").textContent =
+        `${players[currentPlayerIndex].name} (${players[currentPlayerIndex].symbol}) turn`;
 }
 
-function main() {
-    let player1 = document.getElementById('playerOne').value;
-    let player2 = document.getElementById('playerTwo').value;
+function checkWin(symbol) {
+    const w = [
+        [0,1,2], [3,4,5], [6,7,8], // rows
+        [0,3,6], [1,4,7], [2,5,8], // cols
+        [0,4,8], [2,4,6]           // diagonals
+    ];
 
-    let player = new Player(name);
-
-    printBoard();
-    let currentPlayer = player1;
-    let gameOver = false;
-    while (!gameOver) {
-        takeTurn(currentPlayer);
-        let gameResult = checkGameOver();
-        if (gameResult === "win") {
-            console.log(`${currentPlayer} wins!`);
-            gameOver = true;
-        } else if (gameResult === "tie") {
-            console.log("It's a tie!");
-            gameOver = true;
-        } else {
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-        }
-    }
+    return w.some(combo =>
+        combo.every(i => board[i] === symbol)
+    );
 }
 
-main();
+document.getElementById("start").addEventListener("click", startGame);
