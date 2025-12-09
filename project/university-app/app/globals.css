@@ -1,0 +1,356 @@
+/* app/globals.css */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ŠAKNIS – flex: sidebar + turinys */
+
+.app-root {
+  display: flex;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #1f2937 0, #020617 50%, #000 100%);
+  color: #e5e7eb;
+}
+
+/* SIDEBARAS */
+
+.sidebar {
+  width: 260px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: rgba(15, 23, 42, 0.95);
+  border-right: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+}
+
+.sidebar__top {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  font-weight: 700;
+  font-size: 20px;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.45);
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo__title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.logo__subtitle {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.nav__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 999px;
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.nav__link span:first-child {
+  width: 20px;
+  text-align: center;
+}
+
+.nav__link:hover {
+  background: rgba(55, 65, 81, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.8);
+}
+
+/* VARTOTOJO KORTELĖ APAČIOJE */
+
+.sidebar__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+  padding-top: 16px;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-card__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: radial-gradient(circle at 30% 20%, #f97316 0, #e11d48 40%, #1d4ed8 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: white;
+}
+
+.user-card__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card__name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.user-card__role {
+  font-size: 12px;
+  color: #9ca3af;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.user-card__actions button {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.user-card__actions button:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(220, 38, 38, 0.5);
+}
+
+/* PAGRINDINIS TURINYS */
+
+.main {
+  flex: 1;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.main__inner {
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* BENDRI PUSLAPIŲ STILIAI */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.page__title {
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.page__subtitle {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+.page__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* MYGTUKAI */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+}
+
+.btn--primary {
+  background: #2563eb;
+  color: #e5e7eb;
+}
+
+.btn--primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6);
+}
+
+.btn--outline {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.btn--outline:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+/* KORTELĖS / BLOKAI */
+
+.card {
+  background: rgba(15, 23, 42, 0.96);
+  border-radius: 18px;
+  padding: 20px 22px;
+  border: 1px solid rgba(31, 41, 55, 0.9);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card--muted {
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.card__title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.card__meta {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* KURSŲ SĄRAŠAS */
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.course-card__title {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.course-card__desc {
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+/* FORMOS */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form__label {
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+.form__input,
+.form__textarea {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+.form__input:focus,
+.form__textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+.form__error {
+  font-size: 13px;
+  color: #f97316;
+}
+
+/* Mažesni ekranai */
+
+@media (max-width: 800px) {
+  .sidebar {
+    display: none; /* jei norėsi – galima vėliau padaryti mobilų meniu */
+  }
+
+  .main {
+    padding: 16px;
+  }
+}
