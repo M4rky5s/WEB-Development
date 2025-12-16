@@ -1,100 +1,157 @@
 "use client";
 
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const router = useRouter();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [role, setRole] = useState<"STUDENT" | "PROFESSOR">("STUDENT");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setLoading(true);
 
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password }),
-    });
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim() || null,
+          email: email.trim().toLowerCase(),
+          password,
+          role,
+        }),
+      });
 
-    if (!res.ok) {
       const data = await res.json().catch(() => ({}));
-      setError(data.error || "Nepavyko užregistruoti");
-      return;
-    }
 
-    router.push("/login");
+      if (!res.ok) {
+        setError(data?.error || "Registracija nepavyko");
+        return;
+      }
+
+      router.push("/login");
+    } catch (err) {
+      console.error(err);
+      setError("Įvyko klaida. Bandyk dar kartą.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <main className="page">
-      <div className="card">
-        <h1 className="card-title">Registracija</h1>
-        <p className="card-subtitle">
-          Susikurk paskyrą ir gauk prieigą prie universiteto kursų sistemos.
-        </p>
-
-        {error && <p className="error-text">{error}</p>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="label">Vardas (nebūtina)</label>
-            <input
-              className="input"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Jonas"
-            />
+    <main className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md rounded-2xl border border-slate-800 bg-slate-950/60 shadow-[0_20px_60px_rgba(0,0,0,0.55)] backdrop-blur">
+        <div className="p-6 sm:p-8">
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-slate-100">Registracija</h1>
+            <p className="text-sm text-slate-400 mt-1">
+              Susikurk paskyrą ir pradėk naudotis sistema.
+            </p>
           </div>
 
-          <div className="form-group">
-            <label className="label">El. paštas</label>
-            <input
-              className="input"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="jonas@example.com"
-            />
-          </div>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="space-y-1">
+              <label className="text-sm text-slate-300">Vardas (nebūtina)</label>
+              <input
+                className="w-full rounded-xl bg-slate-900/60 border border-slate-800 px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                placeholder="Pvz. Markas"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
-          <div className="form-group">
-            <label className="label">Slaptažodis</label>
-            <input
-              className="input"
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Bent 6 simboliai"
-            />
-          </div>
+            <div className="space-y-1">
+              <label className="text-sm text-slate-300">El. paštas</label>
+              <input
+                className="w-full rounded-xl bg-slate-900/60 border border-slate-800 px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                placeholder="pvz. markas@gmail.com"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <div className="btn-row" style={{ marginTop: 8, marginBottom: 4 }}>
-            <button type="submit" className="btn btn-primary">
-              Registruotis
+            <div className="space-y-1">
+              <label className="text-sm text-slate-300">Slaptažodis</label>
+              <input
+                className="w-full rounded-xl bg-slate-900/60 border border-slate-800 px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                placeholder="••••••••"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            {/* Role pasirinkimas (tokiu pačiu "blokų" stiliumi) */}
+            <div className="space-y-2">
+              <p className="text-sm text-slate-300">Rolė</p>
+
+              <div className="grid grid-cols-2 gap-2">
+                <label className={`cursor-pointer rounded-xl border px-3 py-2 text-sm transition
+                  ${role === "STUDENT"
+                    ? "border-blue-500 bg-blue-500/10 text-slate-100"
+                    : "border-slate-800 bg-slate-900/40 text-slate-300 hover:border-slate-700"}`}>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="STUDENT"
+                    checked={role === "STUDENT"}
+                    onChange={() => setRole("STUDENT")}
+                    className="hidden"
+                  />
+                  Studentas
+                </label>
+
+                <label className={`cursor-pointer rounded-xl border px-3 py-2 text-sm transition
+                  ${role === "PROFESSOR"
+                    ? "border-blue-500 bg-blue-500/10 text-slate-100"
+                    : "border-slate-800 bg-slate-900/40 text-slate-300 hover:border-slate-700"}`}>
+                  <input
+                    type="radio"
+                    name="role"
+                    value="PROFESSOR"
+                    checked={role === "PROFESSOR"}
+                    onChange={() => setRole("PROFESSOR")}
+                    className="hidden"
+                  />
+                  Profesorius
+                </label>
+              </div>
+            </div>
+
+            {error && (
+              <div className="rounded-xl border border-red-900/40 bg-red-950/40 px-3 py-2 text-sm text-red-300">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:hover:bg-blue-600 px-4 py-2 text-sm font-semibold text-white"
+            >
+              {loading ? "Registruojama..." : "Registruotis"}
             </button>
-            <Link href="/">
-              <button type="button" className="btn btn-secondary">
-                Atgal
-              </button>
+          </form>
+
+          <div className="mt-6 text-sm text-slate-400">
+            Jau turi paskyrą?{" "}
+            <Link href="/login" className="text-blue-400 hover:text-blue-300">
+              Prisijunk
             </Link>
           </div>
-        </form>
-
-        <p className="helper-text">
-          Jau turi paskyrą?{" "}
-          <Link href="/login" style={{ color: "#93c5fd" }}>
-            Prisijunk čia
-          </Link>
-          .
-        </p>
+        </div>
       </div>
     </main>
   );

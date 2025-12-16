@@ -3,47 +3,44 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
-  try {
-    const { name, email, password } = await req.json();
+  const body = await req.json();
+  const { name, email, password, role } = body;
 
-    if (!email || !password) {
-      return NextResponse.json(
-        { error: "Email ir slaptažodis privalomi" },
-        { status: 400 }
-      );
-    }
-
-    const existing = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (existing) {
-      return NextResponse.json(
-        { error: "Toks vartotojas jau egzistuoja" },
-        { status: 400 }
-      );
-    }
-
-    const hashed = await bcrypt.hash(password, 10);
-
-    const user = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashed,
-        role: "STUDENT",
-      },
-    });
-
+  if (!email || !password) {
     return NextResponse.json(
-      { id: user.id, email: user.email },
-      { status: 201 }
-    );
-  } catch (err) {
-    console.error(err);
-    return NextResponse.json(
-      { error: "Vidinė serverio klaida" },
-      { status: 500 }
+      { error: "Trūksta duomenų" },
+      { status: 400 }
     );
   }
+
+  const existing = await prisma.user.findUnique({
+    where: { email },
+  });
+
+  if (existing) {
+    return NextResponse.json(
+      { error: "Vartotojas jau egzistuoja" },
+      { status: 400 }
+    );
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // LEISTINOS ROLĖS
+  const allowedRoles = ["STUDENT", "PROFESSOR"] as const;
+  const safeRole = allowedRoles.includes(role) ? role : "STUDENT";
+
+  const user = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+      role: safeRole,
+    },
+  });
+
+  return NextResponse.json(
+    { id: user.id, email: user.email },
+    { status: 201 }
+  );
 }
